@@ -1,0 +1,202 @@
+/* 基础主题与重置 */
+:root {
+  --bg: #f5f7fb;
+  --card-bg: #ffffff;
+  --text: #1f2937; /* slate-800 */
+  --muted: #6b7280; /* gray-500 */
+  --primary: #4f7df3;
+  --primary-600: #3b6aec;
+  --accent: #6cc3d5;
+  --border: #e5e7eb;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --radius: 16px;
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--text);
+  background: radial-gradient(1200px 800px at 10% 0%, #eef2ff 0%, transparent 60%),
+              radial-gradient(1000px 800px at 90% 0%, #e0f7fa 0%, transparent 60%),
+              var(--bg);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+.app__header { text-align: center; margin-bottom: 12px; }
+
+.app__title {
+  font-size: 1.5rem;
+  line-height: 1.2;
+  margin: 0 0 6px;
+}
+
+.app__subtitle {
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.controls { margin: 8px auto 16px; max-width: 560px; }
+
+.search {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+.search input {
+  padding: 12px 14px;
+  font-size: 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.search input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 125, 243, .2);
+}
+
+.btn {
+  appearance: none;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .02s ease, background .2s ease, box-shadow .2s ease;
+  box-shadow: 0 6px 16px rgba(79, 125, 243, .28);
+}
+.btn:hover { background: var(--primary-600); }
+.btn:active { transform: translateY(1px); }
+.btn:focus-visible { outline: 3px solid rgba(79, 125, 243, .35); outline-offset: 2px; }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  box-shadow: none;
+}
+.btn--ghost:hover { background: rgba(79, 125, 243, .06); }
+
+.hint {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 6px 2px 0;
+}
+
+/* 数据状态 */
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px auto;
+  color: var(--muted);
+  justify-content: center;
+}
+.spinner {
+  width: 22px; height: 22px;
+  border: 3px solid rgba(79, 125, 243, .2);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin .9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.error {
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  color: #b91c1c;
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  margin: 12px 0;
+}
+.error__inner { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.error__text { font-weight: 600; }
+
+/* 卡片 */
+.card {
+  background: var(--card-bg);
+  border-radius: calc(var(--radius) + 2px);
+  box-shadow: var(--shadow);
+  padding: 18px;
+  margin-top: 12px;
+}
+
+.card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.card__title {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.card__city { font-size: 1.1rem; font-weight: 700; }
+.card__date { color: var(--muted); font-size: .95rem; }
+
+.weather {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.weather__main {
+  display: flex; align-items: center; gap: 12px;
+}
+.icon { width: 64px; height: 64px; flex: none; }
+
+.temp {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.temp__current { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em; }
+.temp__desc { color: var(--muted); font-weight: 600; }
+
+.weather__meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  gap: 8px 14px;
+}
+.meta__item { color: var(--text); }
+.meta__label { color: var(--muted); font-size: .9rem; }
+.meta__value { font-weight: 700; font-size: 1.02rem; }
+
+.divider {
+  height: 1px; background: var(--border); margin: 16px 0;
+}
+
+.footer-note { color: var(--muted); font-size: .9rem; }
+
+/* 响应式 */
+@media (min-width: 480px) {
+  .temp__current { font-size: 2.6rem; }
+  .icon { width: 72px; height: 72px; }
+}
+
+@media (min-width: 720px) {
+  .app { padding-top: 36px; }
+  .card { padding: 22px; }
+}
