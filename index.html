@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="单日天气卡片 - 基于 Open-Meteo 的纯前端静态页面" />
+  <title>今日天气 | Weather Today</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="app" role="main">
+    <header class="app__header">
+      <h1 class="app__title" aria-label="今日天气">今日天气 <span class="app__subtitle">Weather Today</span></h1>
+    </header>
+
+    <section class="controls" aria-label="城市搜索">
+      <form id="search-form" class="search" role="search" aria-label="搜索城市">
+        <label class="visually-hidden" for="city-input">城市名称</label>
+        <input id="city-input" name="q" type="text" inputmode="search" placeholder="输入城市名称，如 北京 / Shanghai" aria-label="城市名称" autocomplete="off" />
+        <button id="search-btn" class="btn" type="submit" aria-label="查询天气">查询</button>
+      </form>
+      <p class="hint" id="hint">若拒绝定位，请手动输入城市名</p>
+    </section>
+
+    <section id="status" class="visually-hidden" aria-live="polite" aria-atomic="true"></section>
+
+    <section id="loading" class="loading" role="status" aria-live="polite" hidden>
+      <div class="spinner" aria-hidden="true"></div>
+      <div class="loading__text">加载中…</div>
+    </section>
+
+    <section id="error" class="error" role="alert" hidden>
+      <div class="error__inner">
+        <div class="error__text" id="error-text">发生错误</div>
+        <button id="retry-btn" class="btn btn--ghost" type="button" aria-label="重试">重试</button>
+      </div>
+    </section>
+
+    <section id="card" class="card" aria-live="polite" aria-busy="false">
+      <!-- 动态渲染天气卡片 -->
+    </section>
+
+    <footer class="app__footer" aria-label="数据来源">
+      <small>
+        数据来源：
+        <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open‑Meteo</a>
+        和
+        <a href="https://nominatim.openstreetmap.org/" target="_blank" rel="noopener noreferrer">OpenStreetMap Nominatim</a>
+      </small>
+    </footer>
+  </main>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
