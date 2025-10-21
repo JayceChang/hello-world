@@ -18,3 +18,12 @@ build/
 
 # Misc
 *.local
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Generated wallpapers
+output/
