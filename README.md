@@ -43,3 +43,43 @@
 
 许可证
 - 仅用于演示用途，API 的使用以各自服务条款为准
+
+---
+
+深色极简渐变壁纸生成脚本
+
+本仓库同时提供一个用于生成深色、极简渐变风格桌面壁纸的 Python 脚本（基于 Pillow）。支持常见分辨率预设、自定义尺寸、配色、渐变角度、颗粒（grain）、暗角（vignette）以及可选轻微模糊。
+
+安装
+- Python 3.9+
+- 在仓库根目录执行：
+  - python -m venv .venv && source .venv/bin/activate
+  - pip install -r requirements.txt
+
+基础用法（示例）
+- 生成 4K（3840×2160）默认配色、35° 渐变、适度颗粒与暗角：
+  - python scripts/generate_wallpaper.py --preset 4k --start "#0B1220" --end "#1A2233" --angle 35 --grain 0.06 --vignette 0.2 --out output/wallpaper-4k.png
+
+常用参数
+- --preset {4k,1440p,1080p,ultrawide}：常见分辨率预设（如 4k=3840x2160）
+- --width, --height：自定义分辨率；与 --preset 同时提供时，以具体宽高为准
+- --start, --end：起止颜色（十六进制），如 #0B1220
+- --angle：渐变角度（默认 35）
+- --grain：颗粒强度 0~1（默认 0.06），数值越大颗粒越明显
+- --vignette：暗角强度 0~1（默认 0.2），略微压暗边缘以突出中心
+- --blur：可选高斯模糊半径（默认 0 关闭）。建议在开启颗粒前做轻微模糊以减少带状条纹
+- --seed：整数，用于固定噪声以便复现；不传则随机
+- --out：输出 PNG 路径（默认 output/wallpaper-4k.png）
+
+更多风格示例
+- 冷调蓝紫：
+  - python scripts/generate_wallpaper.py --preset 4k --start "#0E0B19" --end "#1C1630" --angle 25 --grain 0.04 --vignette 0.18 --out output/wallpaper-purple-4k.png
+- 深海青蓝（超宽 21:9）：
+  - python scripts/generate_wallpaper.py --preset ultrawide --start "#0B1F1F" --end "#16333A" --angle 45 --grain 0.08 --vignette 0.25 --out output/wallpaper-teal-ultrawide.png
+- 暖色极简（1440p，轻微模糊）：
+  - python scripts/generate_wallpaper.py --preset 1440p --start "#0F0A0A" --end "#2A1E1B" --angle 30 --grain 0.05 --vignette 0.2 --blur 0.7 --out output/wallpaper-warm-1440p.png
+
+说明
+- 默认输出为 PNG（sRGB，8-bit），保存到 output/ 目录。首次运行会自动创建该目录。
+- 参数错误会给出提示并退出；如需完全自定义尺寸，请同时传入 --width 与 --height。
+- 若需结果可复现，请传入 --seed；同一参数与种子将得到完全一致的噪声纹理。
